@@ -1,0 +1,64 @@
+<button type="button" class="btn btn-danger fa fa-plus" 
+        ng-click="addEditSubProduct(newSubProductToAdd);">Add New Sub PRODUCT
+</button>
+<button ng-click="exportSubProductData(exportDataType);"class="btn btn-sm btn-primary">
+	<i class="ace-icon fa fa-file-excel-o"></i>&nbsp;&nbsp;Export Data To Excel Format&nbsp;&nbsp;
+</button>
+
+<div class="table-responsive">
+    <div class="panel panel-primary">
+        <div class="panel-heading">SUB PRODUCT Details - Listing
+            <div class="sw-search" >
+                <div class="nav-search" id="nav-search">
+                        Filter: <span class="input-icon">
+                            <input placeholder="Filter SUB PRODUCT list ..." class="nav-search-input" 
+								   ng-model="filtersubproduct" ng-change="resetLimit();"  autocomplete="off" 
+								   type="text" style="width:300px;" focus>
+                            <i class="search-icon fa fa-search nav-search-icon"></i>
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-controller="GetSUBPRODUCTDetails" style="height: 450px; overflow: auto;">
+                <table class="table table-striped table-condensed table-hover table-bordered">
+                    <tr>
+                        <th  class="subproductname" custom-sort order="'subproductname'" sort="sort">
+							Sub Product Name</th>
+                        <th  class="productname" custom-sort order="'productname'" sort="sort">
+							Product Name</th>
+                        <th  class="subproductdescr" custom-sort order="'subproductdescr'" sort="sort">
+							Sub Product Description</th>
+                        <th>Sub Product Image</th>
+                        <th  class="isactive" custom-sort order="'isactive'" sort="sort">
+							Activate / In-Active</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr ng-repeat="subProductData in subProductDatalist | filter:filtersubproduct 
+								   | orderBy:sort.sortingOrder:sort.reverse" 
+                        id="{{subProductData.productCd}}" ng-animate="'animate'" 
+                        animate-on-change='subProductData.subproductname'>
+                        <td>{{subProductData.subproductname}}</td>
+                        <td>{{subProductData.productname}}</td>
+                        <td>{{subProductData.subproductdescr}}</td>
+						<td><img src="{{subProductData.subproductimg}}" width="50" height="50" /></td>
+						<td>{{(subProductData.isactive==1)?"Active":"In-Active"}}
+							<a class="btn btn-lg" ng-click="activeInActiveSUBPRODUCT(subProductData)">
+							<i ng-class="{true: 'ace-icon fa fa-unlock', false: 'ace-icon fa fa-lock'}
+										 [subProductData.isactive==1]"></i></a></td>
+                        <td style="width:50px">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default fa fa-edit" 
+                                        ng-click="addEditSubProduct(subProductData);"/>
+                                <!--<button type="button" class="btn btn-danger" 
+										ng-click="activeInActiveSUBPRODUCT(subProductData);">
+									{{(subProductData.isactive==1)? "Active" : "In-Active"}}
+								</button>-->
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<button type="button" class="btn btn-danger fa fa-plus" 
+        ng-click="addEditUserCategory(newUsrCatToAdd);">Add New CATEGORY
+</button>
+<div class="table-responsive">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Bargain Set Users Category Details
+            <div class="sw-search" >
+                <div class="nav-search" id="nav-search">
+                        Filter: <span class="input-icon">
+                            <input placeholder="Filter Limit list ..." class="nav-search-input"
+								   ng-model="filterqrcode" 
+                                   ng-change="resetLimit();"  autocomplete="off" type="text"
+								   style="width:300px;" focus>
+                            <i class="search-icon fa fa-search nav-search-icon"></i>
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-controller="GetUserCategoryDetails">
+                <table class="table table-striped table-condensed table-hover">
+                    <tr>
+                        <th class="usercategoryname" custom-sort order="'usercategoryname'" sort="sort">
+							Category Name&nbsp;</th>
+                        <th class="defaultcategory" custom-sort order="'defaultcategory'" sort="sort">
+							Default Category</th>
+                        <th class="creditpoints" custom-sort order="'creditpoints'" sort="sort">
+							Credit Points</th>
+                        <th>No Of Notification</th>
+                        <th>Un-Limited Plan</th>
+                        <th>Action</th>
+                    </tr>
+					<tr ng-repeat="usrCatData in usrCatDataList 
+								   | filter:filterqrcode
+								   | orderBy:sort.sortingOrder:sort.reverse" 
+                        id="{{usrCatData.usercatid}}" ng-animate="'animate'" 
+                        animate-on-change='usrCatData.usercategoryname'>
+                        <td>{{usrCatData.usercategoryname}}</td>
+                        <td>{{(usrCatData.defaultcategory==1)? "Yes" : "No"}}</td>
+                        <td>{{(usrCatData.unlimited==1)? "Un-Limited" : usrCatData.creditpoints}}</td>
+                        <td>{{(usrCatData.unlimited==1)? "Un-Limited" : usrCatData.noofnotification}}</td>
+                        <td>{{(usrCatData.unlimited==1)? "Yes" : "No"}}</td>
+                        <td style="width:100px">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default fa fa-edit" 
+                                        ng-click="addEditUserCategory(usrCatData);"/>
+                            </div>
+                        </td>
+
+					</tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+                

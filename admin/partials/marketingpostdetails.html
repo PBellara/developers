@@ -1,0 +1,34 @@
+<button type="button" class="btn btn-danger fa fa-plus" 
+        ng-click="addMarkertingPost(newMarketingPostToAdd);">&nbsp;Add MARKETING POST</button>
+<div class="table-responsive">
+    <div class="panel panel-primary">
+        <div class="panel-heading">MARKETING Details - Listing
+            <div class="sw-search" >
+                <div class="nav-search" id="nav-search">
+                        Filter: <span class="input-icon">
+                            <input placeholder="Filter MARKETING list ..." class="nav-search-input" 
+								   ng-model="filterprofession" ng-change="resetLimit();"  autocomplete="off" 
+								   type="text" style="width:300px;" focus>
+                            <i class="search-icon fa fa-search nav-search-icon"></i>
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-controller="GetMarketingPOSTDetails" style="height: 500px; overflow: auto;">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>Tile</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr ng-repeat="professionData in marketingPostDetails | filter:filterprofession " 
+                        id="{{professionData.professionid}}" ng-animate="'animate'" 
+                        animate-on-change='professionData.title'>
+                        <td>{{professionData.title}}</td>
+                        <td>{{professionData.description}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

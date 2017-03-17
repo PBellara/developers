@@ -1,0 +1,43 @@
+<button type="button" class="btn btn-danger fa fa-plus" 
+        ng-click="addEditState(commonAddNewItem);">&nbsp;Add New STATE</button>
+<div class="table-responsive">
+    <div class="panel panel-primary">
+        <div class="panel-heading">STATE Details - Listing
+            <div class="sw-search" >
+                <div class="nav-search" id="nav-search">
+                        Filter: <span class="input-icon">
+                            <input placeholder="Filter STATE list ..." class="nav-search-input" 
+								   ng-model="filterprofession" ng-change="resetLimit();"  autocomplete="off" 
+								   type="text" style="width:300px;" focus>
+                            <i class="search-icon fa fa-search nav-search-icon"></i>
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-controller="GetSTATEDetails"  style="height: 500px; overflow: auto;">
+                <table class="table table-striped table-condensed table-hover table-bordered">
+                    <tr>
+                        <th class="statename" custom-sort order="'statename'" sort="sort">
+							State Name</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr ng-repeat="commonData in commonArrayList | filter:filterprofession " 
+                        id="{{commonData.stateid}}" ng-animate="'animate'" 
+                        animate-on-change='commonData.statename'>
+                        <td>{{commonData.statename}}</td>
+                        <td style="width:150px">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default fa fa-edit" 
+                                        ng-click="addEditState(commonData);"/>
+                                <button type="button" class="btn btn-danger fa fa-trash-o" 
+										ng-click="deleteState(commonData);">
+								</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<style>
+body{
+    padding: 10px;
+}
+
+form {
+    padding: 15px 10px;
+}
+
+.form-control{
+    border: none;
+    padding: 0;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.form-control.ng-invalid,
+.ng-submitted .form-control.ng-invalid{
+    border-bottom:1px solid #900;
+}
+
+.form-control.ng-valid{
+    border-bottom:1px solid #264;
+}
+
+.form-control.ng-pristine{
+    border-bottom: 1px solid #000;
+}
+
+.form-control.ng-pending {
+    border-bottom: 1px solid #04f;
+}
+
+form .form-group {
+    position: relative;
+    padding-top: 15px;
+}
+
+.form-control::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #333;
+}
+
+.form-control:-moz-placeholder {
+    color: #333;
+}
+
+.form-control::-moz-placeholder {
+    color: #333;
+}
+
+.form-control:-ms-input-placeholder {
+    color: #333;
+}
+	
+
+.form-group input[type="checkbox"]{
+    margin: 0 -20px 0 10px;
+    vertical-align: middle;
+}
+
+.form-group.spinner i {
+    position: absolute;
+    top:0;
+    right:0;
+}
+
+</style>
+<button type="button" class="close" ng-click="cancel();">
+    <i class="fa fa-times-circle-o" style="margin:10px;color:blue;"></i>
+</button>
+<div class="modal-header">
+    <h5 class="modal-title">PROFESSION : {{objAddEditData.professionname}}</h5>
+</div>
+<div class="modal-body">
+    <form name="cnf_form" class="form-horizontal" role="form" novalidate 
+		  ng-model-options="{updateOn:'default blur',debounce:{'default':500,'blur':0}}">
+		<div class="row">
+			<div class="col-md-5" >
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Profession" 
+						   ng-model="objAddEditData.professionname" id="professionname" ng-maxlength="200" 
+						   required floating-label uppercased />
+				</div>
+			</div>
+		</div>
+		
+        <div class="space-4"></div>
+        <div class="modal-footer">
+            <form-element label="">
+                <div class="text-right">
+                    <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
+                    <button ng-click="savePROFESSION(objAddEditData);"
+                            ng-disabled="cnf_form.$invalid || enableUpdate"
+                            class="btn btn-sm btn-primary"
+                            type="submit">
+                        <i class="ace-icon fa fa-check"></i>{{buttonText}}
+                    </button>
+                </div>
+            </form-element>
+        </div>
+    </form>
+</div>
